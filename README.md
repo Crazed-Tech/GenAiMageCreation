@@ -69,7 +69,6 @@ src/
 ├── pages/
 │   ├── Index.tsx                   # Home page
 │   ├── ImageGeneratorPage.tsx      # Main generator page
-│   └── NotFound.tsx                # 404 page
 ├── App.tsx                         # Main application component
 ├── main.tsx                        # Entry point
 └── utils/

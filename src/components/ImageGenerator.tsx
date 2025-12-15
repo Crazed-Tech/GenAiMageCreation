@@ -21,12 +21,21 @@ const ImageGenerator = () => {
     setIsLoading(true);
     
     try {
-      // In a real implementation, this would call an AI API
-      // For this demo, we'll simulate the process
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Call Pollinations.ai API
+      const response = await fetch(`https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'image/jpeg'
+        }
+      });
       
-      // Simulate generating an image URL
-      const imageUrl = `https://picsum.photos/512/512?random=${Math.floor(Math.random() * 1000)}`;
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+      
+      // Create object URL for the image
+      const blob = await response.blob();
+      const imageUrl = URL.createObjectURL(blob);
       setGeneratedImage(imageUrl);
       
       // Add to history
@@ -34,8 +43,8 @@ const ImageGenerator = () => {
       
       toast.success('Image generated successfully!');
     } catch (error) {
-      toast.error('Failed to generate image');
       console.error('Image generation error:', error);
+      toast.error('Failed to generate image. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -44,6 +53,17 @@ const ImageGenerator = () => {
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       generateImage();
+    }
+  };
+
+  const downloadImage = () => {
+    if (generatedImage) {
+      const link = document.createElement('a');
+      link.href = generatedImage;
+      link.download = `ai-image-${Date.now()}.jpg`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   };
 
@@ -73,12 +93,21 @@ const ImageGenerator = () => {
         {generatedImage && (
           <div className="space-y-2">
             <h3 className="font-medium">Generated Image:</h3>
-            <img 
-              src={generatedImage} 
-              alt="Generated content" 
-              className="w-full h-auto rounded-lg border"
-              onLoad={() => toast.success('Image loaded successfully!')}
-            />
+            <div className="flex flex-col items-center">
+              <img 
+                src={generatedImage} 
+                alt="Generated content" 
+                className="w-full h-auto rounded-lg border max-h-[512px] object-contain"
+                onLoad={() => toast.success('Image loaded successfully!')}
+              />
+              <Button 
+                onClick={downloadImage} 
+                className="mt-4"
+                variant="outline"
+              >
+                Download Image
+              </Button>
+            </div>
           </div>
         )}
 

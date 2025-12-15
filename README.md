@@ -66,7 +66,6 @@ npm run dev
 src/
 ├── components/
 │   ├── ImageGenerator.tsx          # Main image generation component
-│   └── made-with-dyad.tsx          # (Removed - no Dyad attribution)
 ├── pages/
 │   ├── Index.tsx                   # Home page
 │   ├── ImageGeneratorPage.tsx      # Main generator page

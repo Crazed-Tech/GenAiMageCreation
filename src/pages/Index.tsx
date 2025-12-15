@@ -1,6 +1,3 @@
-// Update this page (the content is just a fallback if you fail to update the page)
-
-import { MadeWithDyad } from "@/components/made-with-dyad";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
@@ -32,8 +29,6 @@ const Index = () => {
             </Button>
           </CardContent>
         </Card>
-        
-        <MadeWithDyad />
       </div>
     </div>
   );

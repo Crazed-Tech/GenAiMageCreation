@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import ImageGenerator from '@/components/ImageGenerator';
-import { MadeWithDyad } from '@/components/made-with-dyad';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -81,10 +80,6 @@ const ImageGeneratorPage = () => {
               Transform your ideas into visual art with endless possibilities
             </CardContent>
           </Card>
-        </div>
-
-        <div className="text-center">
-          <MadeWithDyad />
         </div>
       </div>
     </div>
